@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f5f1">
+  <title>Cybersecurity Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="rail" aria-label="Application">
+      <a class="brand-mark" href="#overview" aria-label="Cybersecurity Assistant home">C<span>.</span></a>
+      <div class="rail-rule"></div>
+      <a class="rail-link active" href="#overview" aria-label="Dashboard" title="Dashboard"><span class="rail-icon">▦</span></a>
+      <a class="rail-link" href="#url-check" aria-label="URL security checker" title="URL checker"><span class="rail-icon">↗</span></a>
+      <a class="rail-link" href="#port-scan" aria-label="Port scanner" title="Port scanner"><span class="rail-icon">⌘</span></a>
+      <div class="rail-bottom"><span class="status-dot"></span><span>LOCAL</span></div>
+    </aside>
+
+    <main id="overview" class="main-content">
+      <header class="topbar">
+        <div class="wordmark">FIELDNOTES <span>/ SECURITY</span></div>
+        <div class="topbar-status"><span class="status-dot"></span> LOCAL SESSION</div>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow">DEFENSIVE TOOLKIT <span>01 — 03</span></p>
+          <h1 id="page-title">Cybersecurity<br><em>Assistant</em></h1>
+          <p class="subtitle">Basic security analysis for defensive and educational use</p>
+        </div>
+        <div class="intro-aside" aria-label="Safety reminder">
+          <span class="aside-index">NOTE 001</span>
+          <p>Only scan hosts you own or have explicit permission to test.</p>
+          <span class="aside-line"></span>
+        </div>
+      </section>
+
+      <section class="dashboard-strip" aria-label="Security dashboard">
+        <article class="metric">
+          <span class="metric-label">URL ANALYSIS</span>
+          <strong id="metric-url">READY</strong>
+          <span id="metric-url-detail" class="metric-detail">No URL checked</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">PORT SCAN</span>
+          <strong id="metric-scan">READY</strong>
+          <span id="metric-scan-detail" class="metric-detail">No host scanned</span>
+        </article>
+        <article class="metric metric-status">
+          <span class="metric-label">SECURITY STATUS</span>
+          <strong id="metric-status">BASIC CHECKS</strong>
+          <span class="metric-detail">Heuristics, not a guarantee</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">RECOMMENDATIONS</span>
+          <strong id="metric-recommendations">02</strong>
+          <span class="metric-detail">General guidance available</span>
+        </article>
+      </section>
+
+      <div class="workspace-grid">
+        <section id="url-check" class="tool-section url-section" aria-labelledby="url-title">
+          <div class="section-heading">
+            <div><span class="section-number">01</span><h2 id="url-title">URL security checker</h2></div>
+            <span class="section-tag">TEXT-ONLY ANALYSIS</span>
+          </div>
+          <p class="section-description">Review visible URL indicators without visiting the destination.</p>
+          <form id="url-form" class="tool-form">
+            <label for="url-input">Enter a website URL</label>
+            <div class="input-action-row">
+              <input id="url-input" name="url" type="text" maxlength="2048" placeholder="https://example.com" autocomplete="url" required>
+              <button id="url-submit" class="button button-primary" type="submit"><span>Check URL</span><span aria-hidden="true">↗</span></button>
+            </div>
+          </form>
+          <div id="url-result" class="result-panel empty-state" aria-live="polite">
+            <div class="empty-glyph">↗</div>
+            <p>URL results will appear here.</p>
+          </div>
+        </section>
+
+        <section id="port-scan" class="tool-section scan-section" aria-labelledby="scan-title">
+          <div class="section-heading">
+            <div><span class="section-number">02</span><h2 id="scan-title">Port scanner</h2></div>
+            <span class="section-tag">TCP / LIMITED</span>
+          </div>
+          <p class="section-description">Check a short list of TCP ports on an authorized host.</p>
+          <form id="scan-form" class="tool-form">
+            <label for="host-input">Host / IP</label>
+            <input id="host-input" name="host" type="text" maxlength="253" placeholder="127.0.0.1" autocomplete="off" required>
+            <label for="ports-input">Ports <span class="label-hint">UP TO 50</span></label>
+            <input id="ports-input" name="ports" type="text" maxlength="255" placeholder="22, 80, 443" autocomplete="off" required>
+            <label class="permission-check" for="authorization-input">
+              <input id="authorization-input" type="checkbox" required>
+              <span>I own this host or have explicit permission to test it.</span>
+            </label>
+            <button id="scan-submit" class="button button-dark" type="submit"><span>Scan Ports</span><span aria-hidden="true">→</span></button>
+          </form>
+          <div id="scan-result" class="result-panel empty-state" aria-live="polite">
+            <div class="empty-glyph">⌘</div>
+            <p>Scan results will appear here.</p>
+          </div>
+        </section>
+      </div>
+
+      <section id="screenshot-check" class="tool-section screenshot-section" aria-labelledby="screenshot-title">
+        <div class="section-heading">
+          <div><span class="section-number">03</span><h2 id="screenshot-title">Screenshot analyzer</h2></div>
+          <span class="section-tag">IN-BROWSER OCR</span>
+        </div>
+        <p class="section-description">Extract visible text and check it for common phishing indicators.</p>
+        <form id="screenshot-form" class="screenshot-form">
+          <label id="screenshot-dropzone" class="screenshot-dropzone" for="screenshot-input">
+            <span class="upload-symbol" aria-hidden="true">↑</span>
+            <span><strong>Select a screenshot</strong><small>PNG, JPG, or WebP / up to 5 MB</small></span>
+            <input id="screenshot-input" name="screenshot" type="file" accept="image/png,image/jpeg,image/webp" required>
+          </label>
+          <div class="screenshot-actions">
+            <span id="screenshot-file-name" class="file-name">No image selected</span>
+            <button id="screenshot-submit" class="button button-primary" type="submit" disabled><span>Analyze Screenshot</span><span aria-hidden="true">↗</span></button>
+          </div>
+        </form>
+        <div id="ocr-progress" class="ocr-progress" hidden>
+          <div class="progress-copy"><span id="ocr-status">Preparing OCR...</span><span id="ocr-percent">0%</span></div>
+          <progress id="ocr-progress-bar" max="100" value="0">0%</progress>
+        </div>
+        <p class="privacy-note">The image stays in this browser and is not uploaded. First use downloads the OCR engine and English language data. Recognized URLs are checked by your local API.</p>
+        <img id="screenshot-preview" class="screenshot-preview" alt="Selected screenshot preview" hidden>
+        <div id="screenshot-result" class="result-panel empty-state" aria-live="polite">
+          <div class="empty-glyph">▧</div>
+          <p>Screenshot findings will appear here.</p>
+        </div>
+      </section>
+
+      <footer class="page-footer"><span>CYBERSECURITY ASSISTANT <span class="footer-separator">/</span> EDUCATIONAL USE</span><span>Basic checks can miss real threats.</span></footer>
+    </main>
+  </div>
+</body>
+</html>
